@@ -1,0 +1,28 @@
+# Virtual Environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Environment variables
+.env
+
+# Node.js
+node_modules/
+grammar-assistant-ui/node_modules/
+
+# Next.js
+.next/
+grammar-assistant-ui/.next/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
