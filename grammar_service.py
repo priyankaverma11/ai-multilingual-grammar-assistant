@@ -1,7 +1,10 @@
 import re
+import json
+
 from models import GrammarResponse
 from chains import grammar_chain
 from language_detector import detect_language
+
 
 def correct_text(text: str) -> GrammarResponse:
 
@@ -29,13 +32,37 @@ def correct_text(text: str) -> GrammarResponse:
     response = grammar_chain.invoke({
         "text": text
     })
+    print(response.content)
 
-    response.language = language
-    response.has_errors = (
-        response.corrected_text.strip() != text.strip()
+    print("========== RAW CONTENT ==========")
+    print(repr(response.content))
+    print("=================================")
+    print("RAW CONTENT:", repr(response.content))
+    try: 
+        data = json.loads(response.content)
+    except Exception as e:
+        print("JSON ERROR:", e)
+        return GrammarResponse(
+            language=language,
+            corrected_text=response.content,
+            has_errors=False,
+            mistakes=[]
+        )
+
+    corrected = data.get("corrected_text", text)
+
+    return GrammarResponse(
+        language=language,
+        corrected_text=corrected,
+        has_errors=(corrected.strip() != text.strip()),
+        mistakes=[]
     )
 
-    if not response.has_errors:
-        response.mistakes = []
+    #corrected = data.get("corrected_text", text)
 
-    return response
+    #return GrammarResponse(
+      #  language=language,
+       # corrected_text=corrected,
+        #has_errors=(corrected.strip() != text.strip()),
+        #mistakes=[]
+   # )
