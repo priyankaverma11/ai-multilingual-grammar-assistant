@@ -38,8 +38,7 @@ Built using **Next.js**, **FastAPI**, **LangChain**, **Ollama**, and **Pydantic*
 
 ### AI Model
 
-- Llama 3.2 (3B)
-
+-  qwen3:1.7b
 ---
 ## Design Decisions
 
@@ -94,7 +93,7 @@ grammar-assistant/
                             |
                             v
                  +----------------------+
-                 |   Ollama (Llama 3.2) |
+                 |   Ollama (qwen3:1.7b) |
                  +----------+-----------+
                             |
                             v
@@ -115,7 +114,7 @@ grammar-assistant/
 1. The user enters a sentence in the web interface.
 2. The frontend sends a POST request to the FastAPI backend.
 3. FastAPI invokes a LangChain pipeline.
-4. LangChain sends the prompt and user input to the local Llama 3.2 model via Ollama.
+4. LangChain sends the prompt and user input to the local qwen3:1.7b model via Ollama.
 5. The model returns a structured response.
 6. Pydantic validates the response.
 7. The frontend displays the corrected sentence and grammar corrections.
@@ -231,9 +230,25 @@ _Add screenshot_
 
 ## Limitations
 
-- Hinglish written in Roman script is inherently ambiguous and may produce inconsistent corrections depending on the underlying language model.
-- The current implementation uses a locally hosted Llama 3.2 model through Ollama. Accuracy and response time depend on the capabilities of the selected model.
+This project uses **Qwen3:1.7B** running locally through **Ollama**. While it provides a lightweight, privacy-friendly, and completely offline solution, it has a few limitations:
 
+- **Limited reasoning capability:** As a 1.7B parameter model, it may struggle with complex grammar, ambiguous sentences, and context-heavy inputs.
+- **Hinglish variability:** Informal Romanized Hindi (e.g., *kr*, *rha*, *h*, *gya*) may not always be normalized correctly due to the lack of standardized spelling.
+- **Punctuation inconsistencies:** The model may occasionally miss commas, question marks, or full stops in corrected sentences.
+- **Prompt sensitivity:** Smaller language models are highly sensitive to prompt design. Longer or more complex prompts can result in inconsistent or empty responses.
+- **Structured output reliability:** Unlike larger commercial models, Qwen3:1.7B may occasionally return malformed or incomplete JSON, requiring additional validation and error handling in the backend.
+- **Context limitations:** The model only processes the current input and cannot infer missing information or resolve ambiguous sentences with high confidence.
+- **Performance:** Running locally on consumer hardware may result in slower response times compared to cloud-hosted LLMs.
+- **No external knowledge:** The model operates without internet access and cannot verify facts or retrieve real-time information.
+
+### Future Improvements
+
+- Upgrade to a larger multilingual model (e.g., Qwen3:4B or Gemma 3 4B) for improved grammar correction accuracy.
+- Integrate cloud-based models such as Gemini or GPT for higher-quality multilingual corrections.
+- Improve Hinglish normalization by expanding prompt examples or fine-tuning on Romanized Hindi datasets.
+- Enhance punctuation restoration and contextual grammar correction.
+- Add confidence scoring and fallback mechanisms for uncertain corrections.
+- Support streaming responses for a smoother user experience.
 ---
 
 ## Learning Outcomes

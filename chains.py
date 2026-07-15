@@ -26,7 +26,8 @@ from models import GrammarResponse
 llm = ChatOllama(
     model="qwen3:1.7b",
     temperature=0,
-    num_predict=200
+    num_predict=200,
+    reasoning=False
 )
 
 #structured_llm = llm.with_structured_output(

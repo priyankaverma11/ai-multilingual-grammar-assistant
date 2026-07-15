@@ -8,6 +8,13 @@ grammar_prompt = ChatPromptTemplate.from_template("""
 You are a multilingual grammar correction assistant.
 
 Your task is to correct grammar, spelling, capitalization,typos and punctuation.
+Always add appropriate punctuation if it is missing.
+
+Examples:
+hello how are you → Hello, how are you?
+what is your name → What is your name?
+मुझे भूख लगी है → मुझे भूख लगी है।
+For Hindi sentences, add the Hindi full stop (।) or an appropriate question mark if punctuation is missing.
 
 Rules:
 
@@ -21,6 +28,13 @@ Rules:
 - Do NOT translate.
 - Do NOT rewrite unnecessarily.
 - Make the smallest possible correction.
+ Correct common English abbreviations and punctuation.
+
+Examples:
+no -> No.
+dr -> Dr.
+mr -> Mr.
+mrs -> Mrs.
 
 For Hinglish written in Roman script:
 - Preserve the Roman script.
