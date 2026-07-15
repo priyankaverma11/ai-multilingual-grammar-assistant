@@ -206,12 +206,13 @@ http://localhost:3000
 ## Screenshots
 
 ### Home Page
-
-_Add screenshot_
-
 ### Grammar Correction
 
-_Add screenshot_
+<img width="898" height="690" alt="Screenshot 2026-07-15 at 10 42 25" src="https://github.com/user-attachments/assets/a21d5e8d-b3da-46de-ad7f-354f0c4017fd" />
+<img width="890" height="645" alt="Screenshot 2026-07-15 at 10 43 28" src="https://github.com/user-attachments/assets/2ff0483d-e972-404a-a1b2-0b40bc2e0098" />
+
+
+
 
 ---
 
